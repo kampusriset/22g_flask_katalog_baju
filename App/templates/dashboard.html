@@ -1,0 +1,59 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Dashboard</h1>
+        <nav>
+            <a class="text-white" href="{{ url_for('index') }}">Katalog Produk</a>
+            <a class="text-white" href="{{ url_for('add_product_route') }}">Tambah Produk</a>
+            <a class="text-white" href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+    <div class="container mt-4">
+        <h2 class="text-center">Statistik</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">Total Produk</div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ stats['total_products'] }}</h5>
+                        <p class="card-text">Jumlah total produk yang terdaftar.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-header">Total Stok</div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ stats['total_stock'] }}</h5>
+                        <p class="card-text">Jumlah total stok produk yang tersedia.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-header">Total Pendapatan</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Rp {{ stats['total_revenue'] }}</h5>
+                        <p class="card-text">Total pendapatan dari semua produk.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Kembali ke Katalog</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

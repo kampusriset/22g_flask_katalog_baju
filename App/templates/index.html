@@ -1,0 +1,85 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Produk</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Katalog Produk</h1>
+        <nav>
+            <a class="text-white" href="{{ url_for('add_product_route') }}">Tambah Produk</a>
+            <a class="text-white" href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a class="text-white" href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+    <div class="container mt-4">
+        <h2>Daftar Produk</h2>
+        
+        <!-- Form Pencarian -->
+        <form method="GET" class="mb-4">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search" placeholder="Cari produk..." value="{{ search }}">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Cari</button>
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nama Produk</th>
+                    <th scope="col">Deskripsi</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Stok</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <th scope="row">{{ loop.index + (page - 1) * 5 }}</th>
+                        <td>{{ product['nama_produk'] }}</td>
+                        <td>{{ product ['deskripsi'] }}</td>
+                        <td>{{ product['harga'] }}</td>
+                        <td>{{ product['stok'] }}</td>
+                        <td>
+                            <a href="{{ url_for('edit_product', product_id=product['produk_id']) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ url_for('delete_product_route', produk_id=product['produk_id']) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Navigasi Halaman -->
+        <nav>
+            <ul class="pagination">
+                {% if page > 1 %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('index', page=page-1, search=search) }}">Sebelumnya</a>
+                    </li>
+                {% endif %}
+                {% for p in range(1, total_pages + 1) %}
+                    <li class="page-item {% if p == page %}active{% endif %}">
+                        <a class="page-link" href="{{ url_for('index', page=p, search=search) }}">{{ p }}</a>
+                    </li>
+                {% endfor %}
+                {% if page < total_pages %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('index', page=page+1, search=search) }}">Selanjutnya</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>
