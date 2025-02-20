@@ -7,7 +7,7 @@ Aplikasi "Katalog Baju" ini adalah sebuah aplikasi web yang dirancang untuk memb
 ## Flowchart
 Berikut adalah flowchart yang menggambarkan alur kerja aplikasi:
 
-<img src="user-flow.png" alt="Flowchart Aplikasi" width="500">
+<img src="screenshot/user-flow.png" alt="Flowchart Aplikasi" width="500">
 
 ## Perkenalan Tim
 - Wirdian Silvani (2213010381) - [Implementasi login, register, logout, dan reset password pada controllers.py, Membuat dan mengatur tampilan halaman untuk fitur-fitur yang ada]
